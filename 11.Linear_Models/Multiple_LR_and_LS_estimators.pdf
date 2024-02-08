@@ -1,0 +1,109 @@
+\documentclass[]{article}
+%\usepackage[left=1.5in, right=1.5in, top=1in, bottom=1in]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr} %This is for editing the headers
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{Multiple Linear Regression and Least Squares estimators}
+\author{Jhonatan Felix}
+\date{}
+
+\begin{document}
+	\maketitle
+	
+	\section{Remembering the Linear Model}
+	
+	The linear regression model classic can be wrote in the following way:
+	$$ Y_i = \beta_0 + \beta_1 x_{i,1} + \cdots + \beta_p x_{i,p} + E_i$$
+	
+	where: 
+	\begin{itemize}
+		\item $Y_i$ is the random variable that models the \textit{i}th observation
+		\item $x_{i,k}$ is the value of the $k$th variable for the $i$th observation
+		\item $E_i$ is the error with a distribution i.i.d. $\mathcal{N}(0,\sigma^2)$
+	\end{itemize}
+	
+	We can write under the matricial form like the following:
+	
+	\begin{align}
+		Y = X\beta + E 
+	\end{align}
+	
+	
+	where:
+	\begin{align}
+		Y =
+		\begin{pmatrix}
+			Y_1 \\
+			Y_2 \\
+			\vdots \\
+			Y_n
+		\end{pmatrix}
+		, 
+		X =
+		\begin{pmatrix}
+			1 & x_{1,1} & \cdots & x_{1,p}  \\
+			1 & x_{2,1} & \cdots & x_{2,p}  \\
+			\vdots & \vdots & \cdots & \vdots  \\
+			1 & x_{n,1} & \cdots & x_{n,p}  
+		\end{pmatrix}
+		,
+		\beta =
+		\begin{pmatrix}
+			\beta_0 \\
+			\beta_1 \\
+			\vdots \\
+			\beta_n
+		\end{pmatrix}
+		,
+		E =
+		\begin{pmatrix}
+			E_1 \\
+			E_2 \\
+			\vdots \\
+			E_n
+		\end{pmatrix}
+		\notag
+	\end{align}
+	
+	With these notations, $\textbf{Y}$ and $\textbf{E}$ are column vector of size $n \times 1$, $\textbf{X}$ is a matrix with $n$ lines and $p+1$ columns, and $\beta$ is a column vector having $p+1$ lines.
+	
+	\section{Estimation of $\beta_i$}
+	
+	The parameters $\beta_i$ can be estimated using the maximum likelihood method, minimizing the criterion of the sum of the squared vertical deviations, \textit{i.e.}
+	
+	$$(\hat{\beta_0},... ,\hat{\beta_p}) = \underset{(\beta_0,...,\beta_p)}{Argmin} \sum\limits_{i=1}^{n} (Y_i - \beta_0 - \beta_1 x_{i,1} - ... - \beta_p x_{i,p})^2 $$
+	
+	And this criterion can be rewrote in the following sentence:
+	\begin{align}
+		\hat{\beta} = \underset{\beta \in \mathbb{R}^{n+1}}{Argmin}||Y - X\beta||^2 = \underset{\beta \in \mathbb{R}^{n+1}}{Argmin} (Y-X\beta)'(Y-X\beta)  
+	\end{align}
+	
+	\vspace{0.1in}
+	
+	\newtheorem{prop}{Proposition}
+	\begin{prop}
+		The estimator of $\beta$ in (1) defined by (2) satifies: 
+		$$ (\textbf{X'X})\hat{\beta} = \textbf{X'Y}$$
+		and under the hypothesis that $\textbf{X'X} is invertible$ we have
+		$$ \hat{\beta} = (\textbf{X} '\textbf{X})^{-1}\textbf{X}'\textbf{Y} $$
+		Furthermore, the covariance matrix of $\hat{\beta}$ defined by $Cov(\hat{\beta}) = \mathbb{E}[(\hat{\beta} - \beta)(\hat{\beta}- \beta)']$ is such that:
+		$$ Cov(\hat{\beta}) = \sigma^2(\textbf{X}'\textbf{X})^{-1}$$
+		
+	\end{prop}
+	
+	\begin{proof}
+		Note that: 
+		\begin{align}
+			(Y- X\beta)'(Y-X\beta) = Y'Y - Y'X\beta - \beta'X'Y + \beta'X'X\beta \notag \\
+			= Y'Y - 2 \beta'X'Y + \beta'X'X\beta  \notag
+		\end{align}
+		
+		Now, we can calculate: 
+		
+	\end{proof}
+\end{document}
